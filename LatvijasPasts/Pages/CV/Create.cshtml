@@ -1,0 +1,228 @@
+﻿@page
+@model LatvijasPasts.Pages.CV.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Person CV</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.FirstName" class="control-label"></label>
+                <input asp-for="PersonalInfo.FirstName" class="form-control" />
+                <span asp-validation-for="PersonalInfo.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.LastName" class="control-label"></label>
+                <input asp-for="PersonalInfo.LastName" class="form-control" />
+                <span asp-validation-for="PersonalInfo.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.PhoneNumber" class="control-label"></label>
+                <input asp-for="PersonalInfo.PhoneNumber" class="form-control" />
+                <span asp-validation-for="PersonalInfo.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.Email" class="control-label"></label>
+                <input asp-for="PersonalInfo.Email" class="form-control" />
+                <span asp-validation-for="PersonalInfo.Email" class="text-danger"></span>
+            </div>
+            <hr />
+            <div style="display: inline-block; margin-right: 40px; opacity: 0.8;">
+                <h3 style="font-family: 'Arial' , sans-serif;">
+                    Education Place </h3>
+                    </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.Educations[0].InstitutionName" class="control-label"></label>
+                <input asp-for="PersonalInfo.Educations[0].InstitutionName" class="form-control" />
+                <span asp-validation-for="PersonalInfo.Educations[0].InstitutionName" class="text-danger"></span>
+            </div>
+                        <div class="form-group">
+                <label asp-for="PersonalInfo.Educations[0].Faculty" class="control-label"></label>
+                <input asp-for="PersonalInfo.Educations[0].Faculty" class="form-control" />
+                <span asp-validation-for="PersonalInfo.Educations[0].Faculty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.Educations[0].Degree" class="control-label"></label>
+                <input asp-for="PersonalInfo.Educations[0].Degree" class="form-control" />
+                <span asp-validation-for="PersonalInfo.Educations[0].Degree" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.Educations[0].IsCompleted" class="control-label"></label>
+                <input asp-for="PersonalInfo.Educations[0].IsCompleted" class="form-control" />
+                <span asp-validation-for="PersonalInfo.Educations[0].IsCompleted" class="text-danger"></span>
+            </div>
+            <br />
+            <div id="education-container"></div>
+ <button type="button"
+                    class="btn btn-primary"
+         onclick="addEducation()">
+     Add More Educations
+ </button>
+            <br></br>
+            <hr></hr>
+            <script>
+                let educationCounter = 1;
+
+                function addEducation() {
+                    const container = document.getElementById('education-container');
+
+                    const newEducationFields = document.createElement('div');
+                    newEducationFields.innerHTML = `
+                <p></p>
+                <div style="display: inline-block; margin-right: 40px; opacity: 0.8;">
+                    <h3 style="font-family: 'Arial' , sans-serif;">Education Place ${educationCounter + 1}</h3>
+                    </div>
+                    <p></p>
+
+                   <div class="form-group">
+                    <label class="control-label">InstitutionName</label>
+                    <input name="PersonalInfo.Educations[${educationCounter}].InstitutionName" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                    <label class="control-label"> Faculty</label>
+                     <input name="PersonalInfo.Educations[${educationCounter}].Faculty" class="form-control" />
+                     </div>
+                     
+                     <div class="form-group">
+                    <label class="control-label">Degree</label>
+
+                                        <select name="PersonalInfo.Educations[${educationCounter}].Degree"  style="background-color: white; border: 1px solid red; height: 30px; width: 400px; border-radius: 5px; margin-top: 0.4px; margin-bottom: 1px;">
+                        <option value="None">None</option>
+                        <option value="HighSchool">High School</option>
+                        <option value="College">College</option>
+                        <option value="University">University</option>
+                    </select>
+
+                    
+                        Education Status
+                    </div>
+                                        <select name="PersonalInfo.Educations[${educationCounter}].IsCompleted" style="background-color: white; border: 1px solid red; height: 30px; width: 400px; border-radius: 5px; margin-top: 0.4px; margin-bottom: 1px;"
+                    >
+                        <option value="Postponed">Postponed</option>
+                        <option value="Studying">Studying</option>
+                        <option value="Finished">Finished</option>
+                    </select>
+                    <br></br>
+                                    <button type="button" class="btn btn-danger" onclick="removeLastEducation(this)">Delete</button>
+                               <hr />
+                                    </div> `;
+
+                    container.appendChild(newEducationFields);
+                    educationCounter++;
+                }
+
+                function removeLastEducation() {
+                    const container = document.getElementById('education-container');
+
+                    container.removeChild(container.lastChild);
+
+                    educationCounter--;
+                }
+            </script>
+                <div style="display: inline-block; margin-right: 40px; opacity: 0.8;">
+                    <h3 style="font-family: 'Arial' , sans-serif;">
+                        Work Place
+                    </h3>
+                    </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.WorkExperiences[0].CompanyName" class="control-label"></label>
+                <input asp-for="PersonalInfo.WorkExperiences[0].CompanyName" class="form-control" />
+                <span asp-validation-for="PersonalInfo.WorkExperiences[0].CompanyName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.WorkExperiences[0].Position" class="control-label"></label>
+                <input asp-for="PersonalInfo.WorkExperiences[0].Position" class="form-control" />
+                <span asp-validation-for="PersonalInfo.WorkExperiences[0].Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.WorkExperiences[0].YearsOfExperience" class="control-label"></label>
+                <input asp-for="PersonalInfo.WorkExperiences[0].YearsOfExperience" class="form-control" />
+                <span asp-validation-for="PersonalInfo.WorkExperiences[0].YearsOfExperience" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.WorkExperiences[0].Description" class="control-label"></label>
+                <input asp-for="PersonalInfo.WorkExperiences[0].Description" class="form-control" />
+                <span asp-validation-for="PersonalInfo.WorkExperiences[0].Description" class="text-danger"></span>
+            </div>
+            <div id="work-container"></div>
+            <br />
+            <button type="button"
+                    class="btn btn-primary"
+                    onclick="addWorkPlace()">
+                Add More Work Place
+            </button>
+            <br></br>
+            <script>
+                let workCounter = 1;
+
+                function addWorkPlace() {
+                    const container = document.getElementById('work-container');
+
+                    const newWorkFields = document.createElement('div');
+                    newWorkFields.innerHTML = `
+                <p></p>
+                <div style="display: inline-block; margin-right: 40px; opacity: 0.8;">
+                    <h3 style="font-family: 'Arial' , sans-serif;">Work Place ${workCounter + 1}</h6>
+                    </div>
+                    <p></p>
+
+                    <div class="form-group">
+                    <label class="control-label">Company Name</label>
+                    <input name="PersonalInfo.WorkExperiences[${workCounter}].CompanyName" class="form-control" />
+                    </div>
+
+                        <div class="form-group">
+                         <label class="control-label">Position</label>
+                        <input name="PersonalInfo.WorkExperiences[${workCounter}].Position" class="form-control" />
+                         </div>
+
+                         <div class="form-group">
+                        <label class="control-label">Years Of Experience</label>
+                        <input name="PersonalInfo.WorkExperiences[${workCounter}].YearsOfExperience" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                        <label class="control-label">Description</label>
+                        <input name="PersonalInfo.WorkExperiences[${workCounter}].Description" class="form-control" />
+                        </div>
+                    <br />
+                                    <button type="button" class="btn btn-danger" onclick="removeLastWork(this)">Delete</button>
+                                <hr />
+                                    </div>
+                 `;
+
+                    container.appendChild(newWorkFields);
+                    workCounter++;
+                }
+
+                function removeLastWork() {
+                    const container = document.getElementById('work-container');
+
+                    container.removeChild(container.lastChild);
+
+                    workCounter--;
+                }
+            </script>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Create" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

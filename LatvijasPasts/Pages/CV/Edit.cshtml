@@ -1,0 +1,234 @@
+﻿@page
+@model LatvijasPasts.Pages.CV.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h3>Personal Information</h3>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PersonalInfo.Id" />
+            <div class="form-group">
+                <label asp-for="PersonalInfo.FirstName" class="control-label"></label>
+                <input asp-for="PersonalInfo.FirstName" class="form-control" />
+                <span asp-validation-for="PersonalInfo.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.LastName" class="control-label"></label>
+                <input asp-for="PersonalInfo.LastName" class="form-control" />
+                <span asp-validation-for="PersonalInfo.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.PhoneNumber" class="control-label"></label>
+                <input asp-for="PersonalInfo.PhoneNumber" class="form-control" />
+                <span asp-validation-for="PersonalInfo.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PersonalInfo.Email" class="control-label"></label>
+                <input asp-for="PersonalInfo.Email" class="form-control" />
+                <span asp-validation-for="PersonalInfo.Email" class="text-danger"></span>
+            </div>
+            <hr />
+            <div style="display: inline-block; margin-right: 40px; opacity: 0.8;">
+                <h3 style="font-family: 'Arial' , sans-serif;">
+                    Work Place
+                </h3>
+            </div>
+
+            @* Block With Work *@
+                     @for (int i = 0; i < Model.PersonalInfo.WorkExperiences.Count; i++)
+         {
+                var workExperience = Model.PersonalInfo.WorkExperiences[i];
+    <div class="work-experience" id="workExperience_@workExperience.Id">
+                <input type="hidden" asp-for="PersonalInfo.WorkExperiences[i].Id" />
+                <div class="work-experience">
+                    <div class="form-group">
+                        <label asp-for="PersonalInfo.WorkExperiences[i].CompanyName" class="control-label"></label>
+                        <input asp-for="PersonalInfo.WorkExperiences[i].CompanyName" class="form-control" />
+                        <span asp-validation-for="PersonalInfo.WorkExperiences[i].CompanyName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PersonalInfo.WorkExperiences[i].Position" class="control-label"></label>
+                        <input asp-for="PersonalInfo.WorkExperiences[i].Position" class="form-control" />
+                        <span asp-validation-for="PersonalInfo.WorkExperiences[i].Position" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PersonalInfo.WorkExperiences[i].YearsOfExperience" class="control-label"></label>
+                        <input asp-for="PersonalInfo.WorkExperiences[i].YearsOfExperience" class="form-control" />
+                        <span asp-validation-for="PersonalInfo.WorkExperiences[i].YearsOfExperience" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PersonalInfo.WorkExperiences[i].Description" class="control-label"></label>
+                        <input asp-for="PersonalInfo.WorkExperiences[i].Description" class="form-control" />
+                        <span asp-validation-for="PersonalInfo.WorkExperiences[i].Description" class="text-danger"></span>
+                    </div>
+                    <br />
+                        <button type="button" class="btn btn-danger" onclick="deleteWorkExperience('@workExperience.Id')">Delete Work Place</button>
+                <hr />
+                    </div>
+                </div>
+         }
+            <script>
+                function deleteWorkExperience(workExperienceId) {
+                    var workExperienceElement = document.getElementById('workExperience_' + workExperienceId);
+                    workExperienceElement.remove();
+                }
+            </script>
+
+            <div id="workExperienceContainer"></div>
+
+            @*Add More Work Exp*@
+            <button type="button" class="btn btn-primary" onclick="addWorkExperience()">Add Work Experience</button>
+
+            <script>
+                let workCounter = 0;
+                function addWorkExperience() {
+                    const workExperienceContainer = document.getElementById('workExperienceContainer');
+                    const newWorkExperience = document.createElement('div');
+
+                    newWorkExperience.innerHTML = `
+                     <div class="form-group">
+                     <label class="control-label">Company Name</label>
+                     <input name="NewWorkExperiences[${workCounter}].CompanyName" class="form-control" />
+                     </div>
+
+                     <div class="form-group">
+                     <label class="control-label">Position</label>
+                     <input name="NewWorkExperiences[${workCounter}].Position" class="form-control" />
+                     </div>
+
+                     <div class="form-group">
+                     <label class="control-label">Years of Experience</label>
+                     <input name="NewWorkExperiences[${workCounter}].YearsOfExperience" class="form-control" />
+                     </div>
+
+                     <div class="form-group">
+                     <label class="control-label">Description</label>
+                     <input name="NewWorkExperiences[${workCounter}].Description" class="form-control" />
+                     </div>
+                      
+                     <button type="button" class="btn btn-danger" onclick="deleteWorkExperienceContainer(this)">Delete Added Work</button>
+                     <hr />
+                     `;
+
+                    workExperienceContainer.appendChild(newWorkExperience);
+                    workCounter++;
+                }
+
+                function deleteWorkExperienceContainer(button) {
+                    button.parentNode.remove();
+                    workCounter--;
+                }
+            </script>
+            <br></br>
+                       <div style="display: inline-block; margin-right: 40px; opacity: 0.8;">
+                <h3 style="font-family: 'Arial' , sans-serif;">
+                    Education Place
+                </h3>
+            </div>
+
+            @* Block With Education *@
+            @for (int i = 0; i < Model.PersonalInfo.Educations.Count; i++)
+            {
+                var Education = Model.PersonalInfo.Educations[i];
+                <div class="education" id="Education_@Education.Id">
+                    <input type="hidden" asp-for="PersonalInfo.Educations[i].Id" />
+                    <div class="education-place">
+                        <div class="form-group">
+                            <label asp-for="PersonalInfo.Educations[i].InstitutionName" class="control-label"></label>
+                            <input asp-for="PersonalInfo.Educations[i].InstitutionName" class="form-control" />
+                            <span asp-validation-for="PersonalInfo.Educations[i].InstitutionName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PersonalInfo.Educations[i].Faculty" class="control-label"></label>
+                            <input asp-for="PersonalInfo.Educations[i].Faculty" class="form-control" />
+                            <span asp-validation-for="PersonalInfo.Educations[i].Faculty" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PersonalInfo.Educations[i].Degree" class="control-label"></label>
+                            <input asp-for="PersonalInfo.Educations[i].Degree" class="form-control" />
+                            <span asp-validation-for="PersonalInfo.Educations[i].Degree" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="PersonalInfo.Educations[i].IsCompleted" class="control-label"></label>
+                            <input asp-for="PersonalInfo.Educations[i].IsCompleted" class="form-control" />
+                            <span asp-validation-for="PersonalInfo.Educations[i].IsCompleted" class="text-danger"></span>
+                        </div>
+                        <br />
+                        <button type="button" class="btn btn-danger" onclick="deleteEducation('@Education.Id')">Delete Education Place</button>
+                        <hr />
+                    </div>
+                </div>
+            }
+            <script>
+                function deleteEducation(EducationId) {
+                    var EducationElement = document.getElementById('Education_' + EducationId);
+                    EducationElement.remove();
+                }
+            </script>
+            <div id="EducationContainer"></div>
+
+            @*Add More Education*@
+            <button type="button" class="btn btn-primary" onclick="addEducation()">Add Education</button>
+
+            <script>
+                let EducationCounter = 0;
+                function addEducation() {
+                    const EducationContainer = document.getElementById('EducationContainer');
+                    const newEducation = document.createElement('div');
+
+                    newEducation.innerHTML = `
+                      <div class="form-group">
+                     <label class="control-label">Institution Name</label>
+                     <input name="NewEducation[${EducationCounter}].InstitutionName" class="form-control" />
+                     </div>
+
+                     <div class="form-group">
+                     <label class="control-label">Faculty</label>
+                     <input name="NewEducation[${EducationCounter}].Faculty" class="form-control" />
+                     </div>
+                       
+                     <div class="form-group">
+                     <label class="control-label">Degree</label>
+                     <input name="NewEducation[${EducationCounter}].Degree" class="form-control" />
+                     </div>
+
+                     <div class="form-group">
+                     <label class="control-label">Education Status</label>
+                     <input name="NewEducation[${EducationCounter}].IsCompleted" class="form-control" />
+                     </div>
+
+                     <button type="button" class="btn btn-danger" onclick="deleteEducationContainer(this)">Delete Added Education</button>
+                     <hr />
+                     `;
+
+                    EducationContainer.appendChild(newEducation);
+                    EducationCounter++;
+                }
+
+                function deleteWorkEducationContainer(button) {
+                    button.parentNode.remove();
+                    EducationCounter--;
+                }
+            </script>
+            <br></br>
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Save" />
+            </div>
+     </form>
+   </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

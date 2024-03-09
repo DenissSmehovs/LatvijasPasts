@@ -1,0 +1,76 @@
+﻿@page
+@model LatvijasPasts.Pages.CV.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>PersonalInfo</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonalInfo.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PersonalInfo.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonalInfo.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PersonalInfo.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonalInfo.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PersonalInfo.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonalInfo.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PersonalInfo.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonalInfo.Educations)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (var education in Model.PersonalInfo.Educations)
+                {
+                    <li>
+                        <strong>@education.Faculty</strong><br />
+                        Faculty: @education.Faculty<br />
+                        Degree: @education.Degree<br />
+                        Status: @education.IsCompleted
+                    </li>
+                }
+            </ul>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PersonalInfo.WorkExperiences)
+        </dt>
+        <dd class="col-sm-10">
+            <ul>
+                @foreach (var workExp in Model.PersonalInfo.WorkExperiences)
+                {
+                    <li>
+                        <strong>@workExp.CompanyName</strong><br />
+                        CompanyName: @workExp.CompanyName<br />
+                        Position: @workExp.Position<br />
+                        Years In Company: @workExp.YearsOfExperience<br />
+                        Description: @workExp.Description
+                    </li>
+                }
+            </ul>
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.PersonalInfo.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>
