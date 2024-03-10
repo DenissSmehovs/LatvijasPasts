@@ -29,12 +29,6 @@ namespace LatvijasPasts.Pages.CV
         [BindProperty]
         public PersonalInfo PersonalInfo { get; set; } = new PersonalInfo();
 
-        [BindProperty]
-        public Education Education { get; set; }
-
-        [BindProperty]
-        public WorkExperience WorkExperience { get; set; }
-
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {

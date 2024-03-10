@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using LatvijasPasts.Data;
 using LatvijasPasts.Models;
 using System.Net;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Newtonsoft.Json;
 
 namespace LatvijasPasts.Pages.CV
 {
@@ -29,6 +31,10 @@ namespace LatvijasPasts.Pages.CV
 
         [BindProperty]
         public List<Education> NewEducation { get; set; } = new List<Education>();
+
+        public List<int> idEduction { get; set; } = new List<int>();
+
+        public List<int> idWorkExp { get; set; } = new List<int>();
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -54,25 +60,69 @@ namespace LatvijasPasts.Pages.CV
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            //if (!ModelState.IsValid)
+            //{
+            //    return Page();
+            //}
+
+            string idEductionJson = Request.Form["idEduction"];
+            idEduction = JsonConvert.DeserializeObject<List<int>>(idEductionJson);
+
+            string idWorkExpJson = Request.Form["idWorkExp"];
+            idWorkExp = JsonConvert.DeserializeObject<List<int>>(idWorkExpJson);
+
+            if (idEduction != null)
             {
-                return Page();
+                foreach (var id in idEduction)
+                {
+                    var entityToRemoveEducation = await _context.Education.FindAsync(id);
+
+                    if (entityToRemoveEducation != null)
+                    {
+                        _context.Education.Remove(entityToRemoveEducation);
+                    }
+                }
             }
+
+            if (idWorkExp != null)
+            {
+                foreach (var id in idWorkExp)
+                {
+                    var entityToRemoveWorkExp = await _context.WorkExperience.FindAsync(id);
+
+                    if (entityToRemoveWorkExp != null)
+                    {
+                        _context.WorkExperience.Remove(entityToRemoveWorkExp);
+                    }
+                }
+            }
+
+            await _context.SaveChangesAsync();
 
             _context.Attach(PersonalInfo).State = EntityState.Modified;
-
-            foreach (var workExperience in PersonalInfo.WorkExperiences)
+            if (PersonalInfo.WorkExperiences != null)
             {
-                _context.Entry(workExperience).State = EntityState.Modified;
+                foreach (var workExperience in PersonalInfo.WorkExperiences)
+                {
+                    _context.Entry(workExperience).State = EntityState.Modified;
+                }
             }
 
-            foreach (var edu in PersonalInfo.Educations)
-            {
-                _context.Entry(edu).State = EntityState.Modified;
+            if (PersonalInfo.Educations != null)
+            { 
+                foreach (var edu in PersonalInfo.Educations)
+                {
+                    _context.Entry(edu).State = EntityState.Modified;
+                }
             }
 
             if (NewEducation != null)
             {
+                if(PersonalInfo.Educations == null)
+                {
+                    PersonalInfo.Educations = new List<Education>();
+                }
+
                 foreach (var edu in NewEducation)
                 {
                     if (!string.IsNullOrEmpty(edu.InstitutionName))
@@ -84,6 +134,11 @@ namespace LatvijasPasts.Pages.CV
 
             if (NewWorkExperiences != null)
             {
+                if(PersonalInfo.WorkExperiences == null)
+                {
+                    PersonalInfo.WorkExperiences = new List<WorkExperience>();
+                }
+
                 foreach (var newWorkExperience in NewWorkExperiences)
                 {
                     if (!string.IsNullOrEmpty(newWorkExperience.CompanyName))

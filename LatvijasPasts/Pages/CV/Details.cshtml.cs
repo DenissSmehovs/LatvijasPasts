@@ -30,7 +30,7 @@ namespace LatvijasPasts.Pages.CV
 
             var personalinfo = await _context.PersonalInfo
                 .Include(edu => edu.Educations)
-                .Include(edu => edu.WorkExperiences)
+                .Include(work => work.WorkExperiences)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (personalinfo == null)
             {

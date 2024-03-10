@@ -35,36 +35,76 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.PersonalInfo.Email)
         </dd>
+        <hr />
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PersonalInfo.Educations)
         </dt>
         <dd class="col-sm-10">
             <ul>
+                <style>
+                    table {
+                        width: 600px;
+                        text-align: center;
+                        vertical-align: middle;
+                    }
+
+                    th, td {
+                        border: 1px solid black;
+                        padding: 10px;
+                        text-align: center;
+                        width: 25%;
+                </style>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>University</td>
+                            <td>Faculty</td>
+                            <td>Degree</td>
+                            <td>Education Status</td>
+                        </tr>
+                    </thead>
                 @foreach (var education in Model.PersonalInfo.Educations)
-                {
-                    <li>
-                        <strong>@education.Faculty</strong><br />
-                        Faculty: @education.Faculty<br />
-                        Degree: @education.Degree<br />
-                        Status: @education.IsCompleted
-                    </li>
+                    {
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>@education.InstitutionName</td>
+                                    <td>@education.Faculty</td>
+                                    <td>@education.Degree</td>
+                                    <td>@education.IsCompleted</td>
+                                </tr>
+                            </tbody>
+                        </table>
                 }
             </ul>
         </dd>
+        <hr />
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.PersonalInfo.WorkExperiences)
         </dt>
         <dd class="col-sm-10">
             <ul>
+            <table>
+                    <thead>
+                        <tr>
+                            <td>CompanyName</td>
+                            <td>Position</td>
+                            <td>Years In Company</td>
+                            <td>Job Description</td>
+                        </tr>
+                    </thead>
                 @foreach (var workExp in Model.PersonalInfo.WorkExperiences)
-                {
-                    <li>
-                        <strong>@workExp.CompanyName</strong><br />
-                        CompanyName: @workExp.CompanyName<br />
-                        Position: @workExp.Position<br />
-                        Years In Company: @workExp.YearsOfExperience<br />
-                        Description: @workExp.Description
-                    </li>
+                        {
+                     <table>
+                        <tbody>
+                            <tr>
+                                <td>@workExp.CompanyName</td>
+                                <td>@workExp.Position</td>
+                                <td>@workExp.YearsOfExperience</td>
+                                <td>@workExp.Description</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 }
             </ul>
         </dd>
