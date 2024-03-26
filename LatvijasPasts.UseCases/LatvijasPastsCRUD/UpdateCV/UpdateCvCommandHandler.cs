@@ -31,12 +31,12 @@ namespace LatvijasPasts.UseCases.LatvijasPastsCRUD.UpdateCV
 
         public Task<ServiceResult> Handle(UpdateCvCommand request, CancellationToken cancellationToken)
         {
-            var check = _mapper.Map<PersonalData>(request.RequestModel);
-            check.Id = request.Id;
+            var personalData = _mapper.Map<PersonalData>(request.RequestModel);
+            personalData.Id = request.Id;
 
-            _cvService.Update(check);
-            _entityServiceEdu.Update(check.Educations);
-            _entityServiceWork.Update(check.WorkExperiences);
+            _cvService.Update(personalData);
+            _entityServiceEdu.Update(personalData.Educations);
+            _entityServiceWork.Update(personalData.WorkExperiences);
 
             return Task.FromResult(new ServiceResult());
         }
