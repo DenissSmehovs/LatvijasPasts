@@ -1,0 +1,19 @@
+﻿using LatvijasPasts.Core.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LatvijasPasts.UseCases.Models
+{
+    public class CvRequestModel
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public Education Educations { get; set; }
+        public WorkExperience WorkExperiences { get; set; }
+    }
+}

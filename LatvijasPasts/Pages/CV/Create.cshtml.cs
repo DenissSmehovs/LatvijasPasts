@@ -29,7 +29,6 @@ namespace LatvijasPasts.Pages.CV
         [BindProperty]
         public PersonalInfo PersonalInfo { get; set; } = new PersonalInfo();
 
-        // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
