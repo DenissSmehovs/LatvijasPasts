@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34322.80
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LatvijasPasts", "LatvijasPasts\LatvijasPasts.csproj", "{585723B3-E05B-4F2B-9FA4-299947935145}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LatvijaPasts", "LatvijaPasts\LatvijaPasts.csproj", "{E06BC579-2CC4-4EB9-ACC6-B25387C9C58E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LatvijasPasts.Core", "LatvijasPasts.Core\LatvijasPasts.Core.csproj", "{B33A18CA-03D4-4F63-8398-3A59DBDC0D47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LatvijasPasts.Data", "LatvijasPasts.Data\LatvijasPasts.Data.csproj", "{2C069BFC-C150-4F4C-9B8D-6E7B653708D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LatvijasPasts.Services", "LatvijasPasts.Services\LatvijasPasts.Services.csproj", "{B09BDF93-A27D-432A-97F7-57ADA901A1AF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LatvijasPasts.UseCases", "LatvijasPasts.UseCases\LatvijasPasts.UseCases.csproj", "{4C166AEB-CC8D-47DF-862F-F10E02083B7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +19,31 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{585723B3-E05B-4F2B-9FA4-299947935145}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{585723B3-E05B-4F2B-9FA4-299947935145}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{585723B3-E05B-4F2B-9FA4-299947935145}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{585723B3-E05B-4F2B-9FA4-299947935145}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E06BC579-2CC4-4EB9-ACC6-B25387C9C58E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E06BC579-2CC4-4EB9-ACC6-B25387C9C58E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E06BC579-2CC4-4EB9-ACC6-B25387C9C58E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E06BC579-2CC4-4EB9-ACC6-B25387C9C58E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B33A18CA-03D4-4F63-8398-3A59DBDC0D47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B33A18CA-03D4-4F63-8398-3A59DBDC0D47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B33A18CA-03D4-4F63-8398-3A59DBDC0D47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B33A18CA-03D4-4F63-8398-3A59DBDC0D47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C069BFC-C150-4F4C-9B8D-6E7B653708D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C069BFC-C150-4F4C-9B8D-6E7B653708D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C069BFC-C150-4F4C-9B8D-6E7B653708D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C069BFC-C150-4F4C-9B8D-6E7B653708D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B09BDF93-A27D-432A-97F7-57ADA901A1AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B09BDF93-A27D-432A-97F7-57ADA901A1AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B09BDF93-A27D-432A-97F7-57ADA901A1AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B09BDF93-A27D-432A-97F7-57ADA901A1AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C166AEB-CC8D-47DF-862F-F10E02083B7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C166AEB-CC8D-47DF-862F-F10E02083B7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C166AEB-CC8D-47DF-862F-F10E02083B7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C166AEB-CC8D-47DF-862F-F10E02083B7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E690F207-4BCB-4EB7-AC28-6A86249464F5}
+		SolutionGuid = {F00FA168-0CAE-475E-B349-B6CD160C18B4}
 	EndGlobalSection
 EndGlobal
