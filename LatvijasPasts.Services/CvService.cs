@@ -34,7 +34,7 @@ namespace LatvijasPasts.Services
             _context.PersonalData
                   .Include(edu => edu.Educations)
                   .Include(work => work.WorkExperiences)
-                  .Where(database => database.Id == id)
+                  .Where(personalData => personalData.Id == id)
                   .ExecuteUpdateAsync(b => b
                   .SetProperty(s => s.FirstName, s => data.FirstName)
                   .SetProperty(s => s.LastName, s => data.LastName)

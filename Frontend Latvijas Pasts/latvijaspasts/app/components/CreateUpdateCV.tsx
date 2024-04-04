@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { CvRequest } from "../services/personalinfo";
 import Modal from "antd/es/modal/Modal";
 import Input from "antd/es/input";
+import WorkExperienceInput from "../components/WorkExperience";
+import EducationInput from "../components/Education";
 
 interface Props{
     mode: Mode;
@@ -92,48 +94,14 @@ export const CreateUpdateCv = ({
                 onChange={(e) => setPersonalInfo({ ...personalInfo, phoneNumber: e.target.value })}
                 placeholder="PhoneNumber"
             />
-            {/* WorkExperience */}
-            <Input
-                value={personalInfo.workExperiences ? personalInfo.workExperiences.companyName : ''}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, workExperiences: { ...personalInfo.workExperiences, companyName: e.target.value } })}
-                placeholder="Company Name"
-            />
-            <Input
-                value={personalInfo.workExperiences ? personalInfo.workExperiences.position : ''}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, workExperiences: { ...personalInfo.workExperiences, position: e.target.value } })}
-                placeholder="Position"
-            />
-              <Input
-                value={personalInfo.workExperiences ? personalInfo.workExperiences.yearsOfExperience : ''}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, workExperiences: { ...personalInfo.workExperiences, yearsOfExperience: e.target.value } })}
-                placeholder="YearsOfExperience"
-            />
-              <Input
-                value={personalInfo.workExperiences ? personalInfo.workExperiences.description : ''}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, workExperiences: { ...personalInfo.workExperiences, description: e.target.value } })}
-                placeholder="Description"
-            />
-            {/* Education */}
-            <Input
-                value={personalInfo.educations ? personalInfo.educations.institutionName: ''}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, educations: { ...personalInfo.educations, institutionName: e.target.value } })}
-                placeholder="Institution Name"
-            />
-            <Input
-                value={personalInfo.educations ? personalInfo.educations.faculty: ''}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, educations: { ...personalInfo.educations, faculty: e.target.value } })}
-                placeholder="Faculty"
-            />
-            <Input
-                value={personalInfo.educations ? personalInfo.educations.degree: ''}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, educations: { ...personalInfo.educations, degree: e.target.value } })}
-                placeholder="Degree"
-            />
-             <Input
-                value={personalInfo.educations ? personalInfo.educations.status: ''}
-                onChange={(e) => setPersonalInfo({ ...personalInfo, educations: { ...personalInfo.educations, status: e.target.value } })}
-                placeholder="Status"
-            />
+        <WorkExperienceInput
+          value={personalInfo.workExperiences}
+          onChange={(newValue) => setPersonalInfo({ ...personalInfo, workExperiences: newValue })}
+        />
+        <EducationInput
+          value={personalInfo.educations}
+          onChange={(newValue) => setPersonalInfo({ ...personalInfo, educations: newValue })}
+        />
         </div>
     </Modal>
     );
